@@ -11,7 +11,7 @@ hf_username = "shikhr"
 
 
 # Define the training function
-def train_tokenizer(midi_paths, vocab_size):
+def train_tokenizer(midi_paths, vocab_size, push_to_hub=False):
     print("starting training")
     config = TokenizerConfig(
         num_velocities=16, use_chords=True, use_programs=True, use_tempos=True
@@ -20,12 +20,14 @@ def train_tokenizer(midi_paths, vocab_size):
     tokenizer.train(vocab_size=vocab_size, files_paths=midi_paths)
     print("ending training")
 
-    tokenizer.push_to_hub(
-        f"{hf_username}/miditok_mega{i}k",
-        private=True,
-        token=os.environ.get("HF_TOKEN"),
-    )
-    tokenizer.save_params(Path(f"tokenizer2_mega{i}k.json"))
+    if push_to_hub:
+        tokenizer.push_to_hub(
+            f"{hf_username}/miditok2_{i}k",
+            private=True,
+            token=os.environ.get("HF_TOKEN"),
+        )
+
+    tokenizer.save_pretrained(f"miditok2_{i}k")
 
 
 # Define the tokenizer sizes
@@ -33,4 +35,4 @@ tokenizer_size = [6, 12, 18, 24]
 
 # Train the tokenizer
 for i in tokenizer_size:
-    train_tokenizer(midi_paths, i * 1000)
+    train_tokenizer(midi_paths, i * 1000, True)

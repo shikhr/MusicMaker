@@ -1,3 +1,9 @@
 .env
 data/adl-piano-midi/*
 chunked
+m1.pt
+miditok2_6k
+miditok2_12k
+miditok2_18k
+miditok2_24k
+__pycache__/

@@ -3,17 +3,10 @@ from miditok import MusicTokenizer
 from pathlib import Path
 import torch
 from dataclasses import dataclass
-from dotenv import load_dotenv
 from midi2audio import FluidSynth
-import os
-
-load_dotenv(Path(".env"))
-hf_username = "shikhr"
 
 # Load the tokenizer
-tokenizer = MusicTokenizer.from_pretrained(
-    f"{hf_username}/miditok2_12k", token=os.environ.get("HF_TOKEN")
-)
+tokenizer = MusicTokenizer.from_pretrained("miditok2_12k")
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
@@ -31,13 +24,13 @@ class GPTConfig:
 
 
 model = GPT(GPTConfig())
-sd = torch.load("m1.pt")
+sd = torch.load("m1.pt", map_location=device)
 model.load_state_dict(sd)
 model.to(device)
 
 # Generate some music
 out = model.generate(
-    torch.tensor([[0]]).to(device), max_new_tokens=800, temperature=1.0, top_k=None
+    torch.tensor([[1]]).to(device), max_new_tokens=800, temperature=1.0, top_k=None
 )
 
 # Save the generated MIDI

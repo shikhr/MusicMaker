@@ -4,12 +4,7 @@ import math
 from contextlib import nullcontext
 import torch
 from dataclasses import dataclass
-from dotenv import load_dotenv
-import os
 
-load_dotenv(Path(".env"))
-
-hf_username = "shikhr"
 
 from model import GPT
 from miditok import MusicTokenizer
@@ -18,9 +13,7 @@ from torch.utils.data import DataLoader
 from pathlib import Path
 
 # Load the tokenizer
-tokenizer = MusicTokenizer.from_pretrained(
-    f"{hf_username}/miditok2_12k", token=os.environ.get("HF_TOKEN")
-)
+tokenizer = MusicTokenizer.from_pretrained("miditok2_12k")
 
 # load paths to the midi files
 midi_paths = list(Path("adl-piano-midi").glob("**/*.mid"))
