@@ -2,6 +2,8 @@
 
 This project aims to generate new musical compositions in the MIDI format using a transformer model trained on a dataset of piano MIDI files. The generated MIDI files can be converted to audio files, allowing you to listen to the model's compositions.
 
+You can download and try out the trained base model from Hugging Face: [shikhr/music_maker](https://huggingface.co/shikhr/music_maker) 
+
 ## Overview
 
 The project consists of the following main components:
