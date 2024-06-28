@@ -4,6 +4,8 @@ This project aims to generate new musical compositions in the MIDI format using 
 
 You can download and try out the trained base model from Hugging Face: [shikhr/music_maker](https://huggingface.co/shikhr/music_maker) 
 
+Wanna Listen to a few samples of generated music?  [SoundCloud](https://on.soundcloud.com/Prt9gnLS7LhC3Hj89)
+
 ## Overview
 
 The project consists of the following main components:
